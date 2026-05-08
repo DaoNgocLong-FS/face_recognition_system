@@ -1,0 +1,35 @@
+services:
+  api:
+    build: .
+    container_name: face-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://face:face@postgres:5432/attendance
+      - SIMILARITY_THRESHOLD=0.45
+      - DETECTOR_SIZE=640
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: face-postgres
+    environment:
+      POSTGRES_USER: face
+      POSTGRES_PASSWORD: face
+      POSTGRES_DB: attendance
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U face -d attendance"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

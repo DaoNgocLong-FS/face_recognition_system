@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+data/*.db
+data/*.index
+data/faces_meta.json
+*.jpg
+*.png
+!docs/**
+.DS_Store
+.idea/
+.vscode/
