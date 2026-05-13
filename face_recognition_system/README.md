@@ -23,8 +23,6 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Lần đầu chạy, InsightFace sẽ tự download model `buffalo_l` (~280MB) vào `~/.insightface/`.
-
 ## 2. Đăng ký khuôn mặt
 
 ### Cách A — qua webcam (tương tác)
